@@ -1,0 +1,230 @@
+-----------------------------------------------
+RÉSOLUTION
+-----------------------------------------------
+
+Il y a potentiellement beaucoup de façons de résoudre le Circaminx. Nous proposons
+ici une méthode dont nous ne prétendons ni que c'est la meilleure pour débuter ni
+qu'elle fournit les meilleurs résultats après entraînement.
+
+Nous représenterons ici les chiffres à l'envers "|1", "|2" etc. La position
+initiale est donc la suivante.
+
+   1    |1
+2     ^    |2
+3     v    |3
+   4    |4
+   
+Les deux premières étapes que nous vous présenterons se réalisent sans rien apprendre.
+La dernière nécessite l'apprentissage d'une suite de 10 mouvements. Nous pouvons
+néanmoins affirmer qu'aucune méthode ne peut prétendre pouvoir résoudre ce casse-
+tête sans l'apprentissage d'au moins une suite de mouvements - comme c'est le cas
+pour presque tous les casse-têtes de ce genre.
+  
+I - PLACER "1", "2" ET "3"
+
+La première étape consiste à placer les symboles "1", "2" et "3". Ici aucune 
+difficulté particulière. Voici la position à laquelle on doit aboutir :
+
+   1     x
+2     x     x
+3     x     x
+   x     x
+   
+II - PLACER "|1", "|2" ET "|3"
+
+Cela est plus difficile car il ne faut pas casser ce qu'on a déjà construit à
+l'étape I. Prendre l'habitude de manipuler les cercles et user d'un peu de logique
+devrait néanmoins suffire à s'en sortir sans règle précise. Un seul conseil toutefois :
+si on a déjà placé un ensemble de symboles S et qu'on veut placer un symbole X, il sera
+très probablement nécessaire de bouger temporairement S afin de pouvoir placer X,
+puis de replacer correctement S comme il était. Voici la position à laquelle on doit
+aboutir :
+
+   1    |1
+2     x    |2
+3     x    |3
+   x     x
+   
+III - FINITION
+
+Il reste donc 4 symboles à placer. Contrairement à avant, il est ici très difficile
+de le faire sans briser les symboles déjà correctement placés. C'est pourquoi il est
+nécessaire d'effectuer une suite de mouvement (algorithme) dans ce but. L'algorithme
+que nous vous proposons permute uniquement deux symboles, indiqués ci-dessous par un "S".
+
+   x     x
+x     x     x
+x     x     x
+   S     S
+   
+Cet algorithme de 10 mouvements est le suivant, nous le noterons dorénavant A :
+
+[K] [S] [K] [D] [K] [F] [J] [Q] [H] [Q]
+
+Bien sûr, cet algorithme seul ne suffit pas à tout résoudre. Il est néanmoins possible
+de l'adapter afin de pouvoir échanger n'importe quelle paire de symboles. Voici un
+exemple : supposons qu'on souhaite échanger les deux symboles notés S ci-dessous.
+
+   x     x
+x     x     x
+x     S     x
+   S     x
+
+On voit qu'appliquer A ne suffit pas car on n'est pas dans la situation adaptée. Toutefois,
+on peut s'y ramener en appliquant d'abord le mouvement [J] afin que les S se retrouvent
+en bas. Ensuite on applique A. Mais on constate que tout semble cassé ! C'est normal car
+on a d'abord effectué [J], il faut donc l'annuler en effectuant [L]. Ainsi la suite de
+mouvements [J] + A + [L] permet d'échanger les S ci-dessus.
+
+Autre exemple plus compliqué (essayez de chercher une bonne séquence avant de regarder la
+solution pour vous entraîner) : comment échanger les S ci-dessous ?
+
+   x     x
+x     S     x
+x     S     x
+   x     x
+   
+Réponse : on effectue d'abord [F] pour qu'un des S soit en bas, puis [J]
+pour le second. Maintenant que les S sont bien en bas, on applique A (sans se tromper),
+puis on annule [J] en faisant [L] et enfin on annule [F] en faisant [S] (faites très attention
+à l'ordre d'annulation : retenez qu'il faut en priorité annuler le mouvement le plus récent).
+Mise bout à bout, une séquence correcte est donc [F] + [J] + A + [L] + [S] pour échanger les
+S ci-dessus (à noter que la séquence [J] + [F] + A + [S] + [L] marche également, pourquoi ?)
+
+Maintenant que nous sommes capables d'échanger n'importe quelle paire de symboles,
+on peut résoudre petit à petit les 4 symboles restants. Dans le pire des cas il faudra
+appliquer 3 fois l'algorithme A au total.
+
+Nous illustrons par un exemple concret : nous souhaitons résoudre la configuration
+ci-dessous (nous avons omis les "1", "2", "3", "|1" etc. pour plus de lisibilité : on suppose
+qu'ils sont déjà bien placés grâce aux étapes I et II).
+
+   x      x
+x      4     x
+x     |4     x
+   v      ^
+
+On peut commencer par échanger "v" et et "|4", ainsi "v" sera correctement placé. On ne
+peut pas appliquer directement A. En effet, "v" est en position mais pas "|4". On commence
+donc par faire [J], puis A, puis [L] pour annuler [J] :
+
+   x      x
+x      4     x
+x      v     x
+   |4     ^
+
+On peut maintenant échanger par exemple "|4" et "4" et ainsi "4" sera bien placé.
+On fait d'abord [H], puis A puis [M] pour annuler [H] :
+
+   x      x
+x     |4     x
+x      v     x
+   4      ^
+
+Il ne reste plus qu'à échanger "|4" et "^". Pour ce faire, on peut d'abord faire [G],
+puis A et enfin [Q] pour annuler [G]. Nous avons résolu les 4 symboles et donc le 
+Circaminx.
+
+   x      x
+x     ^      x
+x     v      x
+   4     |4
+
+A noter que théoriquement, il est possible de résoudre absolument tout le casse-tête
+rien qu'en appliquant A suffisamment de fois. Toutefois, nous déconseillons cette
+démarche pour au moins trois raisons : premièrement car elle est extrêmement coûteuse en
+mouvements et en temps, deuxièmement car il est très facile de se tromper en appliquant A,
+il vaut donc mieux l'utiliser le moins de fois possible, et troisièmement car cela
+nuit à la compréhension du Circaminx : il est plus bénéfique de s'entraîner à manipuler
+les cercles pour comprendre comment les mouvements changent la position et comment surmonter
+une difficulté en utilisant sa logique.
+
+-----------------------------------------------
+POUR FAIRE PÉTER LE SCORE
+-----------------------------------------------
+
+La méthode ci-dessus est fonctionnelle pour résoudre le Circaminx, mais si votre désir
+est de faire le meilleur score possible, beaucoup d'astuces peuvent sensiblement améliorer
+le score. Nous listons ces points par ordre croissant de difficulté d'application. Ces
+conseils ne sont bien entendu pas exhaustifs.
+
+1) Évitez au maximum de bouger plusieurs fois de suite le même cercle. Sinon, le nombre de 
+mouvements va grimper très vite. Apprenez à utiliser les touches raccourcies et
+forcez-vous à toujours alterner les deux cercles.
+
+2) Avant de vous chronométrer, sachez exactement les premiers mouvements que vous allez
+effectuer. Il est en effet possible d'en prévoir quelques uns avec de l'entraînement,
+ainsi vous n'aurez qu'à exécuter sans réfléchir le début, vous faisant ainsi gagner de précieuses
+secondes.
+
+3) Entraînez-vous sans chronomètre. Le chronomètre nous encourage à résoudre concrètement sans
+prendre le temps de réfléchir à la manière optimale de résoudre une situation. Résultat :
+on perd du temps. S'entraîner à faire des résolutions sans chronomètre permet de prendre
+le temps de réfléchir à comment résoudre de manière optimale une situation, et à force
+on devient de plus en plus apte à appliquer ces méthodes en résolution chronométrée.
+
+4) Filmez vos résolutions. Cela permet de prendre du recul et de repérer précisément les moments
+où vous perdez du temps et ainsi d'établir un plan d'amélioration. Soyez particulièrement vigilant
+aux temps de pause, et réfléchissez à comment, à froid, vous feriez pour résoudre les mêmes situations.
+
+5) Travaillez spécifiquement la dernière étape. Comme c'est la plus systématique - il n'y a pas
+ou peu de réflexion -, c'est là qu'il faut foncer et effectuer rapidement et sans erreur
+les algorithmes appris. La commande [Fin] est prévue à cet effet.
+
+6) Faire beaucoup de résolutions et être patient. Appliquer la théorie et progresser
+prend du temps. La progression sur ce genre de casse-tête ne semble pas linéaire mais plutôt
+par palliers : pendant une période on progresse, puis on stagne un temps, et ainsi de suite.
+
+7) Optimisez la dernière étape. Appliquer l'algorithme A est coûteux en mouvements et il
+existe un algorithme optimal pour chacun des 23 cas finaux possibles (sans compter l'état résolu).
+Plus vous en apprenez, plus vous serez efficace sur la fin. Le lecteur intéressé pourra
+se référer aux fichiers "algorithmes.pdf" et "algorithmes.ods" pour avoir une liste complète
+de ces algorithmes. L'algorithme A présenté correspond au cas N°1 de ces fichiers. Pour plus
+de lisibilité, une autre notation est utilisée, elle est détaillée après la présentation des
+algorithmes.
+
+-----------------------------------------------
+ESTIMER SON NIVEAU
+-----------------------------------------------
+
+Le score permet de juger de la rapidité et de l'efficacité d'une résolution isolément, mais ne permet
+en aucun cas de juger de son niveau. Voici un exemple extrême : un débutant, qui fait habituellement
+des scores autour de 80, remarque après mélange que deux mouvements suffisent pour résoudre
+le Circaminx (ce qui est rare mais possible). S'il ne se trompe pas, il peut facilement
+résoudre la configuration en 1 seconde et il va ainsi obtenir un score de 0.13. C'est mérité
+- il a repéré la résolution en 2 mouvements, bravo à lui - mais on ne peut évidemment pas 
+dire que ce score reflète son niveau habituel. C'est pourquoi il vaut mieux préférer des moyennes
+pour estimer son niveau. Il n'est pas possible de conseiller un nombre précis de résolutions,
+cela dépend du niveau du joueur, mais voici quelques conseils qui nous semble rationnels
+pour se rapprocher d'une estimation fidèle.
+
+- Ne faites des moyennes que lorsque vos temps sont à peu près stables. En effet, si vous
+progressez sensiblement durant l'établissement d'une moyenne, celle-ci ne signifie plus rien.
+Attendez de stagner un minimum.
+
+- Les statistiques sont formelles : plus on a de données, donc de scores, et plus la moyenne
+se rapproche de notre niveau réel (en supposant qu'il soit parfaitement stable, ce qui n'est bien
+entendu pas vrai). Un grand nombre de scores permet notamment de dissiper le facteur chance
+(la fameuse résolution en 2 mouvements sera noyée par les autres scores à condition qu'il y en ait
+beaucoup) et les autres facteurs extérieurs à la performance brute.
+
+- Le plus possible, il faut que les résolutions s'effectuent dans les mêmes conditions. C'est-
+à-dire par exemple au même endroit, à la même heure (évitez de faire une moyenne étalée dans le temps).
+Cela implique qu'il faut éviter de faire trop de scores à la suite car d'autres facteurs
+extérieurs se cumulent, la fatigue notamment.
+
+- Bien entendu, soyez honnête si vous souhaitez la fiabilité : vous pouvez décider de remélanger si
+la configuration ne vous plait pas, mais la moyenne obtenue ne sera probablement pas représentative
+(car vous ne conserverez en somme que les bons débuts, et donc la moyenne sera trop généreuse).
+
+- Il existe d'autres indicateurs statistiques que la moyenne pour résumer une série de données :
+comme la médiane, la variance ou l'écart-type. La moyenne à elle seule est un indicateur
+plutôt fiable si les points précédents sont respectés mais elle a notamment le défaut d'être
+très sensible aux valeurs extrêmes (très petites et très basses), défaut que n'a par exemple
+pas la médiane. C'est la raison pour laquelle, si on choisit la moyenne comme seul indicateur,
+on a pour habitude de retirer le pire et le meilleur score.
+
+- Pour information, les moyennes les plus couramment effectuées au Rubik's Cube sont établies sur
+5, 12, 50 et 100 résolutions (en retirant le meilleur et le pire temps, voir point précédent)
+suivant le niveau de fiabilité qu'on souhaite obtenir. Vous pouvez vous en inspirer en adaptant à
+votre niveau : ne faites pas une moyenne de 50 résolutions si vous résolvez en 1 minute habituellement.
