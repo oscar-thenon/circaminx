@@ -1,5 +1,8 @@
-
 _Circaminx - game designed by Oscar & Arthur Thenon._
+
+![Alt text](/rsc/screenshots/shuffled.png?raw=true "Shuffled Circaminx")
+
+![Alt text](/rsc/screenshots/solved.png?raw=true "Shuffled Circaminx")
 
 ---
 
